@@ -30,7 +30,7 @@ instance ToHtml a => MimeRender HTMLLucid a where
 instance MimeRender HTMLLucid (Html a) where
   mimeRender _ = renderBS
 
-type Tester = "" :> Get '[JSON, HTMLLucid] String
+type Tester = Get '[JSON, HTMLLucid] String
 
 testAPI :: Proxy Tester
 testAPI = Proxy
