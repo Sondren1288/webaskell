@@ -74,6 +74,7 @@ executable webProj
                       lucid ^>=2.11.2,
                       text,
                       time,
+                      mtl,
                       bytestring,
                       proxy,
                       servant-lucid ^>=0.9.0.6,
