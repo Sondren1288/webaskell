@@ -9,6 +9,7 @@ import GHC.Generics (Generic)
 import Data.Aeson (ToJSON)
 import Servant.API (MimeRender (mimeRender), Accept (contentType))
 import Network.HTTP.Media ((//), (/:))
+import Data.ByteString (ByteString)
 
 
 -- Create the types so that they don't need to be re-written. 
@@ -19,14 +20,20 @@ hxTarget_ = makeAttribute "hx-target"
 hxSwap_   = makeAttribute "hx-swap"
 
 
+-- Change these to the actually required values. 
+-- Allows for a bit more flexible expression of values
+newtype MainIn = MainIn 
+  { stringList :: [Text]
+  } deriving (Show, Generic)
+
 data Position = Position 
   { xPos :: Int
   , yPos :: Int
   } deriving (Show, Generic)
 
 
-instance ToJSON Position
 
+instance ToJSON Position
 
 data HTMLLucid
 
