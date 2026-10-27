@@ -23,16 +23,7 @@ import GHC.Generics (Generic)
 import Data.Aeson (ToJSON)
 import Control.Monad.IO.Class (MonadIO(liftIO))
 import Front
-
-
-data HTMLLucid
-
-instance Accept HTMLLucid where 
-  contentType _ = "text" // "HTML" /: ("charset", "utf-8")
-
-
-instance ToHtml a => MimeRender HTMLLucid a where 
-  mimeRender _ = renderBS . toHtml
+import Declarations
 
 
 
@@ -60,30 +51,11 @@ incrementServer ref = increment
                        retPos :: Int -> Int -> Handler Position
                        retPos x y = return $ Position x y
 
+
+
 increProx :: Proxy IncrementAPI
 increProx = Proxy
 
--- Create the types so that they don't need to be re-written. 
--- Generally equivalent to data_ "hx-<>"
-
--- The fragment both routes share: the GET embeds it, the POST replaces it.
-countView :: Int -> Html ()
-countView n = span_ [id_ "count"] (toHtml (show n))
-
-incrementButton :: Html ()
-incrementButton = button_ [hxPost_ "/counter/increment", hxTarget_ "#count", hxSwap_ "outerHTML"] "+1"
-
-
-counterPage :: Int -> Html ()
-counterPage n = doctypehtml_ $ do
-  head_ $ do
-    title_ "Counter"
-    script_ [src_ "https://unpkg.com/htmx.org@2.0.4"] ("" :: Text)
-  body_ $ do
-    p_ [style_ "color:green"] $ do
-      "Count: "
-      countView n 
-    incrementButton
 
 type Tester = Get '[HTMLLucid] (Html ())
 
@@ -101,7 +73,6 @@ app = serve testAPI server
 
 incrementApp :: IORef Int -> Application
 incrementApp ref = serve increProx (incrementServer ref)
-
 
 
 main :: IO ()
