@@ -82,6 +82,7 @@ executable webProj
                       servant-server,
                       wai,
                       warp,
+                      aeson,
                       servant ^>=0.20
 
     -- Directories containing source files.
