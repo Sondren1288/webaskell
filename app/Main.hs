@@ -22,6 +22,7 @@ import Data.IORef (newIORef, IORef, atomicModifyIORef, readIORef, atomicModifyIO
 import GHC.Generics (Generic)
 import Data.Aeson (ToJSON)
 import Control.Monad.IO.Class (MonadIO(liftIO))
+import Front
 
 
 data HTMLLucid
@@ -34,12 +35,6 @@ instance ToHtml a => MimeRender HTMLLucid a where
   mimeRender _ = renderBS . toHtml
 
 
-data Position = Position 
-  { xPos :: Int
-  , yPos :: Int
-  } deriving (Show, Generic)
-
-instance ToJSON Position
 
 
 counterValue :: IO (IORef Int)
@@ -70,11 +65,6 @@ increProx = Proxy
 
 -- Create the types so that they don't need to be re-written. 
 -- Generally equivalent to data_ "hx-<>"
-hxPost_, hxTarget_, hxSwap_ :: Text -> Attribute
-hxPost_   = makeAttribute "hx-post"
-hxTarget_ = makeAttribute "hx-target"
-hxSwap_   = makeAttribute "hx-swap"
-
 
 -- The fragment both routes share: the GET embeds it, the POST replaces it.
 countView :: Int -> Html ()
@@ -82,7 +72,6 @@ countView n = span_ [id_ "count"] (toHtml (show n))
 
 incrementButton :: Html ()
 incrementButton = button_ [hxPost_ "/counter/increment", hxTarget_ "#count", hxSwap_ "outerHTML"] "+1"
-
 
 
 counterPage :: Int -> Html ()
