@@ -11,18 +11,18 @@ import qualified Front
 
 
 type API = Get '[HTMLLucid] (Html ())
-      -- :<|> "cv" :> Get '[HTMLLucid] (Html ()) -- cv on web
-      -- :<|> "cv" :> "download" :> Raw          -- cs as pdf
+      :<|> "cv" :> Get '[HTMLLucid] (Html ()) -- cv on web
+      -- :<|> "cv" :> "download" :> Raw          -- cs as pdf (might be better to do as a button on the cv page)
       :<|> "static" :> Raw                    -- CSS
 
 
 apiServer :: Server API
 apiServer = landingPage
-       -- :<|> cvPage
+       :<|> cvPage
        -- :<|> cvDownload
        :<|> cssPage
-       where landingPage = return Front.landingPage
-             cvPage = undefined
+       where landingPage = pure Front.homePage
+             cvPage      = pure Front.cvPage
              cvDownload = undefined
              cssPage = serveDirectoryWebApp "static"
         
