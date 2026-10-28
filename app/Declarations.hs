@@ -10,6 +10,7 @@ import Data.Aeson (ToJSON)
 import Servant.API (MimeRender (mimeRender), Accept (contentType))
 import Network.HTTP.Media ((//), (/:))
 import Data.ByteString (ByteString)
+import Web.FormUrlEncoded (FromForm)
 
 
 -- Create the types so that they don't need to be re-written. 
@@ -25,6 +26,15 @@ hxSwap_   = makeAttribute "hx-swap"
 newtype MainIn = MainIn 
   { stringList :: [Text]
   } deriving (Show, Generic)
+
+instance ToJSON MainIn
+
+-- Must match the inputs name_ ("nameadder" in this case)
+newtype NameForm = NameForm { nameadder :: Text } deriving Generic
+instance FromForm NameForm
+
+
+
 
 data Position = Position 
   { xPos :: Int

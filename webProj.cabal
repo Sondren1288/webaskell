@@ -81,6 +81,7 @@ executable webProj
                       proxy,
                       servant-lucid ^>=0.9.0.6,
                       http-media ^>=0.8.1.1,
+                      http-api-data,
                       servant-server,
                       wai,
                       warp,
