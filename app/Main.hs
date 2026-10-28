@@ -17,16 +17,11 @@ apiProxy :: Proxy API
 apiProxy = Proxy
 
 
-app :: IORef MainIn -> Application 
-app ref = serve apiProxy (apiServer ref)
+app :: Application 
+app = serve apiProxy apiServer
 
-
-constListStart :: [Text]
-constListStart = ["I have a list", "The list consists of text", "The text is sacred", "Refrigerator"]
 
 main :: IO ()
 main = do 
-      --fast <- newIORef 4
       putStrLn "Hello, Haskell!"
-      ref <- newIORef (MainIn {stringList = constListStart})
-      run 8080 (app ref)
+      run 8080 app
