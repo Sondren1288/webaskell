@@ -3,7 +3,7 @@
 module Front where
 
 import Data.Text (Text)
-import Lucid (ToHtml (toHtml), HtmlT, Html, p_, style_, button_, data_, Attribute, span_, id_, doctypehtml_, script_, src_, body_, head_, title_, div_, tr_, td_, form_, label_, table_, action_, method_, type_, name_, br_, for_, input_, link_, class_, rel_, href_, h1_)
+import Lucid (ToHtml (toHtml), HtmlT, Html, p_, style_, button_, data_, Attribute, span_, id_, doctypehtml_, script_, src_, body_, head_, title_, div_, tr_, td_, form_, label_, table_, action_, method_, type_, name_, br_, for_, input_, link_, class_, rel_, href_, h1_, header_)
 import Lucid.Base (makeAttribute)
 import Declarations
 
@@ -15,9 +15,15 @@ layout title content = doctypehtml_ $ do
     script_ [src_ "https://unpkg.com/htmx.org@2.0.11"] ("" :: Text)
     link_ [rel_ "stylesheet", href_ "/static/style.css"]
   body_ $ do
-    div_ [class_ "starter"] content
+    header_ contentBrowser
+    div_ [class_ "container"] content
     
 
+contentBrowser :: Html ()
+contentBrowser = div_ [class_ "vertical"] $ do
+  div_ [style_ "margin-left:0.5em"] $ p_ "something"
+  div_ [] $ p_ "other"
+  div_ [] $ p_ "than this"
 
 
 homePage :: Html ()

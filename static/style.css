@@ -1,3 +1,33 @@
-div.starter {
+:root{
+  --theme-color: #DFB887;
+}
+
+body {
+  margin: 0px;
+}
+
+header {
+  background-color: var(--theme-color);
+  height: 3em;
+  width: 100%;
+  opacity: .9;
+  /*margin-bottom: 10px;*/
+}
+
+div.vertical {
+  display: flex;
+  flex-direction: row;
+  align-items: middle;
+  height: 100%;
+  width: 100%;
+  gap: 0.8em;
+}
+
+div.container {
   color: green;
+  margin-left: 0.5em;
+}
+
+.marginless {
+  margin: 0;
 }
