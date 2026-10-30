@@ -3,7 +3,7 @@
 module Front where
 
 import Data.Text (Text)
-import Lucid (ToHtml (toHtml), HtmlT, Html, p_, style_, button_, data_, Attribute, span_, id_, doctypehtml_, script_, src_, body_, head_, title_, div_, tr_, td_, form_, label_, table_, action_, method_, type_, name_, br_, for_, input_, link_, class_, rel_, href_, h1_, header_)
+import Lucid (ToHtml (toHtml), HtmlT, Html, p_, style_, button_, data_, Attribute, span_, id_, doctypehtml_, script_, src_, body_, head_, title_, div_, tr_, td_, form_, label_, table_, action_, method_, type_, name_, br_, for_, input_, link_, class_, rel_, href_, h1_, header_, a_)
 import Lucid.Base (makeAttribute)
 import Declarations
 
@@ -21,10 +21,16 @@ layout title content = doctypehtml_ $ do
 
 contentBrowser :: Html ()
 contentBrowser = div_ [class_ "vertical"] $ do
-  div_ [style_ "margin-left:0.5em"] $ p_ "something"
-  div_ [] $ p_ "other"
-  div_ [] $ p_ "than this"
+  div_ [class_ "center", style_ "margin-left:0.5em"] $ 
+    a_ [href_ "/"] "Home"
+  div_ [class_ "center"] 
+    $ a_ [href_ "/cv", style_ "margin:auto"] "Here"
+  div_ [] $ 
+    p_ [class_ "center"] "than this"
 
+
+redirectButton :: String -> String -> Html ()
+redirectButton text redirect = button_ [] (toHtml text)
 
 homePage :: Html ()
 homePage = layout "CV" $ do 

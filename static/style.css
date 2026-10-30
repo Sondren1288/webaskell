@@ -17,7 +17,7 @@ header {
 div.vertical {
   display: flex;
   flex-direction: row;
-  align-items: middle;
+  align-items: center;
   height: 100%;
   width: 100%;
   gap: 0.8em;
@@ -30,4 +30,9 @@ div.container {
 
 .marginless {
   margin: 0;
+}
+
+
+.center {
+  align-items: center;
 }
