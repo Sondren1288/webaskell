@@ -11,8 +11,9 @@ import Network.HTTP.Media ((//), (/:))
 
 -- Create the types so that they don't need to be re-written. 
 -- Generally equivalent to data_ "hx-<>"
-hxPost_, hxTarget_, hxSwap_ :: Text -> Attribute
+hxPost_, hxTarget_, hxSwap_, hxGet_ :: Text -> Attribute
 hxPost_   = makeAttribute "hx-post"
+hxGet_   = makeAttribute "hx-get"
 hxTarget_ = makeAttribute "hx-target"
 hxSwap_   = makeAttribute "hx-swap"
 

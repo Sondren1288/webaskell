@@ -16,7 +16,7 @@ layout title content = doctypehtml_ $ do
     link_ [rel_ "stylesheet", href_ "/static/style.css"]
   body_ $ do
     header_ contentBrowser
-    div_ [class_ "container"] content
+    div_ [class_ "container", name_ "container", id_ "container"] content
     
 
 contentBrowser :: Html ()
@@ -27,10 +27,13 @@ contentBrowser = div_ [class_ "vertical"] $ do
     $ a_ [href_ "/cv", style_ "margin:auto"] "Here"
   div_ [] $ 
     p_ [class_ "center"] "than this"
+  div_ [] $
+    redirectButton "Over there" "/cv"
 
 
-redirectButton :: String -> String -> Html ()
-redirectButton text redirect = button_ [] (toHtml text)
+redirectButton :: Text -> Text -> Html ()
+redirectButton text_ redirect = button_ [class_ "redirect", hxGet_ redirect, hxTarget_ "#container", hxSwap_ "/cv"] (toHtml text_)
+
 
 homePage :: Html ()
 homePage = layout "CV" $ do 
